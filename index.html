@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Helado de 3 bolas</title>
+<script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.7.0/dist/aframe-extras.min.js"></script>
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+
+<body>
+
+  <a-scene physics="debug: false; gravity: 0">
+
+    <!-- Fondo -->
+    <a-sky color="#87CEEB"></a-sky>
+
+    <!-- Piso -->
+    <a-plane
+      position="0 0 -4"
+      rotation="-90 0 0"
+      width="20"
+      height="20"
+      color="#90EE90">
+    </a-plane>
+
+
+    <!-- HELADO -->
+    <a-entity position="0 0 -4">
+
+      <!-- CONO: punta hacia abajo -->
+     <a-cone
+  position="0 1 0"
+  radius-bottom="0.55"
+  radius-top="0.05"
+  height="1.8"
+  color="#D2691E"
+  segments-radial="32"
+  rotation="180 0 0">
+</a-cone>
+
+      <!-- BOLA 1: FRESA -->
+      <a-sphere
+        position="0 2.05 0"
+        radius="0.55"
+        color="#FF4F81"
+        animation="
+          property: position;
+          from: 0 2.05 0;
+          to: 0 2.25 0;
+          dur: 1000;
+          dir: alternate;
+          loop: true;
+          easing: easeInOutQuad">
+      </a-sphere>
+
+
+      <!-- BOLA 2: VAINILLA -->
+      <a-sphere
+        position="0 2.95 0"
+        radius="0.55"
+        color="#FFF2A6"
+        animation="
+          property: position;
+          from: 0 2.95 0;
+          to: 0 3.15 0;
+          dur: 1200;
+          dir: alternate;
+          loop: true;
+          easing: easeInOutQuad">
+      </a-sphere>
+
+
+      <!-- BOLA 3: CHOCOLATE -->
+      <a-sphere
+        position="0 3.85 0"
+        radius="0.55"
+        color="#8B4513"
+        animation="
+          property: position;
+          from: 0 3.85 0;
+          to: 0 4.05 0;
+          dur: 1400;
+          dir: alternate;
+          loop: true;
+          easing: easeInOutQuad">
+          <!-- CARA DE PAYASO -->
+<!-- OJO IZQUIERDO -->
+<a-sphere
+  position="-0.10 -0.10 -0.50"
+  radius="0.05"
+  color="#111111">
+</a-sphere>
+
+<!-- OJO DERECHO -->
+<a-sphere
+  position="0.10 -0.10 -0.50"
+  radius="0.05"
+  color="#111111">
+</a-sphere>
+
+<!-- SONRISA -->
+<a-entity
+  line="start: -0.25 -0.20 -0.52; end: -0.12 -0.27 -0.55; color: #111111; opacity: 1">
+</a-entity>
+
+<a-entity
+  line="start: -0.12 -0.27 -0.55; end: 0 -0.29 -0.56; color: #111111; opacity: 1">
+</a-entity>
+
+<a-entity
+  line="start: 0 -0.29 -0.56; end: 0.12 -0.27 -0.55; color: #111111; opacity: 1">
+</a-entity>
+
+<a-entity
+  line="start: 0.12 -0.27 -0.55; end: 0.25 -0.20 -0.52; color: #111111; opacity: 1">
+</a-entity>
+
+<!-- MEJILLAS ROJAS -->
+<a-sphere
+  position="-0.34 -0.12 -0.48"
+  radius="0.07"
+  color="#FF6B6B">
+</a-sphere>
+
+<a-sphere
+  position="0.34 -0.12 -0.48"
+  radius="0.07"
+  color="#FF6B6B">
+</a-sphere>
+
+        <!-- CREMA CHANTILLY -->
+        <a-cone
+          position="0 0.75 0"
+          radius-bottom="0.30"
+          radius-top="0.0"
+          height="0.55"
+          color="#FFFAF0"
+          segments-radial="20">
+        </a-cone>
+
+        <!-- CEREZA -->
+        <a-sphere
+          position="0 1.20 0"
+          radius="0.15"
+          color="#C41E3A">
+        </a-sphere>
+
+    
+
+
+
+
+
+
+      <!-- COLISIONADOR INVISIBLE: envuelve todo el helado (cono + bolas) -->
+      <a-cylinder
+        position="0 2.5 0"
+        radius="0.85"
+        height="5"
+        visible="false"
+        static-body>
+      </a-cylinder>
+
+    </a-entity>
+
+<!-- MURO INVISIBLE DELANTE DEL HELADO -->
+<a-box
+  position="0 2.5 -5.2"
+  width="4"
+  height="5"
+  depth="0.2"
+  visible="false"
+  static-body>
+</a-box>
+
+
+
+    <!-- JUGADOR / CÁMARA CON COLISIÓN -->
+<a-entity
+  id="rig"
+  position="0 2.5 -7"
+  kinematic-body="shape: cylinder; cylinderAxis: y"
+  movement-controls="fly: false; speed: 2">
+
+  <a-camera
+    position="0 0 0"
+    look-controls>
+  </a-camera>
+
+</a-entity>
+
+    <!-- Luces -->
+    <a-light
+      type="ambient"
+      color="#FFFFFF"
+      intensity="1.5">
+    </a-light>
+
+    <a-light
+      type="directional"
+      position="-3 5 4"
+      intensity="2">
+    </a-light>
+
+  </a-scene>
+
+  <a-scene>
+  <a-assets>
+    <a-asset-item id="robot" src="modelos/pixellabs-robot-3332.glb" scale="1 1 1"></a-asset-item>
+  </a-assets>
+
+  <a-entity gltf-model="#robot"></a-entity>
+</a-scene>
+
+<a-scene>
+  <a-assets>
+    <a-asset-item id="es" src="modelos/tiny_planet_friends_3d-star-3034.glb"></a-asset-item>
+  </a-assets>
+
+  <a-entity gltf-model="#es"></a-entity>
+</a-scene>
+
+</body>
+</html>
