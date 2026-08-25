@@ -146,49 +146,7 @@
           color="#C41E3A">
         </a-sphere>
 
-    
 
-
-
-
-
-
-      <!-- COLISIONADOR INVISIBLE: envuelve todo el helado (cono + bolas) -->
-      <a-cylinder
-        position="0 2.5 0"
-        radius="0.85"
-        height="5"
-        visible="false"
-        static-body>
-      </a-cylinder>
-
-    </a-entity>
-
-<!-- MURO INVISIBLE DELANTE DEL HELADO -->
-<a-box
-  position="0 2.5 -5.2"
-  width="4"
-  height="5"
-  depth="0.2"
-  visible="false"
-  static-body>
-</a-box>
-
-
-
-    <!-- JUGADOR / CÁMARA CON COLISIÓN -->
-<a-entity
-  id="rig"
-  position="0 2.5 -7"
-  kinematic-body="shape: cylinder; cylinderAxis: y"
-  movement-controls="fly: false; speed: 2">
-
-  <a-camera
-    position="0 0 0"
-    look-controls>
-  </a-camera>
-
-</a-entity>
 
     <!-- Luces -->
     <a-light
